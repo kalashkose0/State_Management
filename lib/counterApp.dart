@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_management/bloc/counterBloc.dart';
+import 'package:state_management/bloc/counterState.dart';
 import 'package:state_management/bloc/counterevent.dart';
 
 class counterApp extends StatelessWidget {
-  int count = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,9 +12,11 @@ class counterApp extends StatelessWidget {
         title: const Text("Counter App"),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(count.toString()),
-      ),
+      body: BlocBuilder<CounterBloc, CounterState>(builder: (context, state) {
+        return Center(
+          child: Text(state.count.toString()),
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           BlocProvider.of<CounterBloc>(context).add(IncrementEvent());
