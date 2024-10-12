@@ -11,14 +11,15 @@ class counterApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Counter App"),
+        centerTitle: true,
       ),
       body: Center(
         child: Text(count.toString()),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // BlocProvider.of<CounterBloc>(context).add(IncrementEvent());
-          context.read<CounterBloc>().add(IncrementEvent());
+          BlocProvider.of<CounterBloc>(context).add(IncrementEvent());
+          // context.read<CounterBloc>().add(IncrementEvent());
         },
         child: const Icon(Icons.add),
       ),
